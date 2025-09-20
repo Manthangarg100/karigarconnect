@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutGrid },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
   { href: '/visual-enhancer', label: 'AI Visual Enhancer', icon: Sparkles },
   { href: '/story-weaver', label: 'AI Story Weaver', icon: PenSquare },
   { href: '/voice-storefront', label: 'Voice-to-Storefront', icon: Mic },
@@ -44,7 +44,7 @@ export function MainNav() {
         <div className="flex items-center gap-2 p-2">
           <Palette className="w-8 h-8 text-primary" />
           <div className="flex flex-col">
-            <h1 className="text-xl font-headline font-semibold">CraftConnect</h1>
+            <h1 className="text-xl font-headline font-semibold">KarigarConnect</h1>
             <p className="text-xs text-muted-foreground">AI Assistant</p>
           </div>
         </div>

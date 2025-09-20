@@ -6,12 +6,12 @@ import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Awar
 import { Logo } from '@/components/logo';
 
 const tools = [
-    { icon: Mic, title: 'Voice-to-Storefront' },
-    { icon: BookOpen, title: 'AI Storytelling' },
-    { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor' },
-    { icon: Languages, title: 'Cross-Cultural Translator' },
-    { icon: Megaphone, title: 'Marketing Assistant' },
-    { icon: Award, title: 'Grant & Scheme Advisor' },
+    { icon: Mic, title: 'Voice-to-Storefront', href: '/voice-storefront' },
+    { icon: BookOpen, title: 'AI Storytelling', href: '/story-weaver' },
+    { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor', href: '#' },
+    { icon: Languages, title: 'Cross-Cultural Translator', href: '#' },
+    { icon: Megaphone, title: 'Marketing Assistant', href: '/marketing-tool' },
+    { icon: Award, title: 'Grant & Scheme Advisor', href: '#' },
 ];
 
 export default function Home() {
@@ -51,8 +51,12 @@ export default function Home() {
                 Connect traditional craftsmanship with modern technology. Help artisans reach a wider global market and preserve cultural heritage through AI-powered tools.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <Button size="lg">Explore Marketplace <ArrowRight className="ml-2" /></Button>
-                <Button size="lg" variant="outline">Artisan Dashboard</Button>
+                <Link href="#">
+                  <Button size="lg">Explore Marketplace <ArrowRight className="ml-2" /></Button>
+                </Link>
+                <Link href="/dashboard">
+                  <Button size="lg" variant="outline">Artisan Dashboard</Button>
+                </Link>
               </div>
             </div>
             <div className="relative hidden md:block">
@@ -84,10 +88,12 @@ export default function Home() {
             <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-4xl md:text-5xl">A Full Suite of AI-Powered Tools</h2>
             <div className="mx-auto grid max-w-5xl grid-cols-2 md:grid-cols-3 gap-6 py-12">
               {tools.map((tool) => (
-                <Card key={tool.title} className="p-6 flex flex-col items-center justify-center text-center gap-2 hover:shadow-md transition-shadow">
-                  <tool.icon className="w-8 h-8 text-primary" />
-                  <p className="font-semibold">{tool.title}</p>
-                </Card>
+                <Link href={tool.href} key={tool.title}>
+                  <Card className="p-6 flex flex-col items-center justify-center text-center gap-2 hover:shadow-md transition-shadow h-full">
+                    <tool.icon className="w-8 h-8 text-primary" />
+                    <p className="font-semibold">{tool.title}</p>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
