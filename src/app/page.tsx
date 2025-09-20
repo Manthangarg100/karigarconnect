@@ -14,7 +14,7 @@ const tools = [
     { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor', href: '#' },
     { icon: Languages, title: 'Cross-Cultural Translator', href: '#' },
     { icon: Megaphone, title: 'Marketing Assistant', href: '/marketing-tool' },
-    { icon: Award, title: 'Grant & Scheme Advisor', href: '#' },
+    { icon: Award, title: 'Grant & Scheme Advisor', href: '/grant-advisor' },
 ];
 
 export default function Home() {

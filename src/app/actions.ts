@@ -3,6 +3,7 @@
 import { enhanceProductImage, EnhanceProductImageInput } from "@/ai/flows/enhance-product-images";
 import { generateProductDescription, GenerateProductDescriptionInput } from "@/ai/flows/generate-product-descriptions";
 import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/generate-marketing-copy";
+import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
     try {
@@ -31,5 +32,15 @@ export async function generateMarketingCopyAction(input: GenerateMarketingCopyIn
     } catch (error) {
         console.error(error);
         return { success: false, error: "Failed to generate marketing copy." };
+    }
+}
+
+export async function grantAdvisorAction(input: GrantAdvisorInput) {
+    try {
+        const result = await grantAdvisor(input);
+        return { success: true, data: result };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: "Failed to generate advice." };
     }
 }
