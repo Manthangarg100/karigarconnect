@@ -34,10 +34,10 @@ export default function Home() {
           </Link>
         </nav>
         <div className="ml-auto lg:ml-6 flex items-center gap-4">
-          <Link href="/dashboard">
+          <Link href="/login">
             <Button variant="ghost" size="sm">Login</Button>
           </Link>
-          <Link href="/dashboard">
+          <Link href="/login">
             <Button>Join as Artisan</Button>
           </Link>
         </div>
