@@ -71,6 +71,12 @@
       "description": "Portrait of Priya Singh, a female painter.",
       "imageUrl": "https://picsum.photos/seed/female-painter/300/300",
       "imageHint": "woman painting"
+    },
+    {
+      "id": "artisan-4",
+      "description": "Portrait of Kiran Patel, a male wood carver.",
+      "imageUrl": "https://picsum.photos/seed/male-carver/300/300",
+      "imageHint": "man carving"
     }
   ]
 }

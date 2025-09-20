@@ -20,6 +20,13 @@
             "craft": "Madhubani Painting",
             "location": "Madhubani, Bihar",
             "story": "I paint stories from myth and nature. My art comes from Madhubani, a place where every home's wall is a canvas. Taught by my mother and grandmother, I use natural pigments and traditional tools like twigs and fingers. My paintings are a celebration of life, filled with symbols of prosperity, love, and faith. Through my art, I keep the stories of our ancestors alive for the next generation to cherish."
+        },
+        {
+            "id": "artisan-4",
+            "name": "Kiran Patel",
+            "craft": "Wood Carver",
+            "location": "Saharanpur, Uttar Pradesh",
+            "story": "I carve stories in wood, a skill passed down through my family for generations. Each piece of wood has a soul, and my job is to reveal it. From my small workshop in Saharanpur, I create intricate designs inspired by nature and Mughal architecture. My creations are more than just decorative items; they are a bridge to our rich cultural past."
         }
     ]
 }
