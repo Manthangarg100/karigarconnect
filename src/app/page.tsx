@@ -119,7 +119,9 @@ export default function Home() {
                 <p className="max-w-3xl mx-auto mt-4 text-primary-foreground/80">
                     Join thousands of artisans who are already using AI to tell their stories, connect with buyers, and grow their traditional craft businesses.
                 </p>
-                <Button size="lg" variant="secondary" className="mt-8 bg-card text-card-foreground hover:bg-card/90">Start Your Story</Button>
+                <Link href="/story-weaver">
+                    <Button size="lg" variant="secondary" className="mt-8 bg-card text-card-foreground hover:bg-card/90">Start Your Story</Button>
+                </Link>
             </div>
         </section>
 
