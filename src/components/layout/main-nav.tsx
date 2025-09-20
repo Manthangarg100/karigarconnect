@@ -38,7 +38,7 @@ const navItems = [
   { href: '/visual-enhancer', label: 'AI Visual Enhancer', icon: Sparkles },
   { href: '/story-weaver', label: 'AI Story Weaver', icon: PenSquare },
   { href: '/voice-storefront', label: 'Voice-to-Storefront', icon: Mic },
-  { href: '/marketing-tool', label: 'Marketing Tool', icon: Megaphone },
+  { href: '/marketing-tool', label: 'AI Marketing Assistant', icon: Megaphone },
   { href: '/profile', label: 'Artisan Profile', icon: User },
   { href: '/transactions', label: 'Transactions', icon: DollarSign },
 ];
