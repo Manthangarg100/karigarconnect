@@ -9,37 +9,37 @@
     {
       "id": "product-1",
       "description": "A colorful handwoven textile.",
-      "imageUrl": "https://picsum.photos/seed/product1/400/400",
+      "imageUrl": "https://picsum.photos/seed/textile/400/400",
       "imageHint": "colorful textile"
     },
     {
       "id": "product-2",
       "description": "Intricate pottery with traditional designs.",
-      "imageUrl": "https://picsum.photos/seed/product2/400/400",
+      "imageUrl": "https://picsum.photos/seed/pottery/400/400",
       "imageHint": "pottery design"
     },
     {
       "id": "product-3",
       "description": "A piece of handcrafted jewelry.",
-      "imageUrl": "https://picsum.photos/seed/product3/400/400",
+      "imageUrl": "https://picsum.photos/seed/jewelry/400/400",
       "imageHint": "handcrafted jewelry"
     },
     {
       "id": "product-4",
       "description": "A detailed wood carving.",
-      "imageUrl": "https://picsum.photos/seed/product4/400/400",
+      "imageUrl": "https://picsum.photos/seed/woodwork/400/400",
       "imageHint": "wood carving"
     },
     {
       "id": "product-5",
       "description": "A vibrant traditional painting.",
-      "imageUrl": "https://picsum.photos/seed/product5/400/400",
+      "imageUrl": "https://picsum.photos/seed/painting/400/400",
       "imageHint": "traditional painting"
     },
     {
       "id": "product-6",
       "description": "A leather handcrafted bag.",
-      "imageUrl": "https://picsum.photos/seed/product6/400/400",
+      "imageUrl": "https://picsum.photos/seed/leather/400/400",
       "imageHint": "leather bag"
     },
     {
