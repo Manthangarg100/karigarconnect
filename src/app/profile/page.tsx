@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { BackButton } from '@/components/back-button';
 
 const artisanAvatar = PlaceHolderImages.find(p => p.id === 'artisan-avatar');
 const products = PlaceHolderImages.filter(p => p.id.startsWith('product-'));
@@ -10,6 +11,7 @@ const products = PlaceHolderImages.filter(p => p.id.startsWith('product-'));
 export default function ArtisanProfilePage() {
   return (
     <div className="p-6 space-y-8">
+      <BackButton />
       <header className="flex flex-col md:flex-row items-center gap-6">
         <Avatar className="w-32 h-32 border-4 border-primary">
           {artisanAvatar && <AvatarImage src={artisanAvatar.imageUrl} alt="Artisan" data-ai-hint={artisanAvatar.imageHint} />}
