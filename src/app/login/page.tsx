@@ -27,7 +27,7 @@ import { Chrome, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
-import { emailLogin, emailSignUp, googleLogin } from "@/app/auth/actions";
+import { signInWithEmail, signUpWithEmail, signInWithGoogle } from "@/lib/firebase/auth";
 
 
 const loginSchema = z.object({
@@ -79,9 +79,9 @@ export default function LoginPage() {
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    const result = await googleLogin();
+    const result = await signInWithGoogle();
     setIsLoading(false);
-    if (result.success) {
+    if (result.user) {
         router.push("/dashboard");
     } else {
         toast({
@@ -94,12 +94,19 @@ export default function LoginPage() {
 
   async function onSubmit(values: FormSchemaType) {
     setIsLoading(true);
-    const action = isLoginView ? emailLogin : emailSignUp;
-    // @ts-ignore
-    const result = await action(values);
+    
+    let result;
+    if (isLoginView) {
+      const { email, password } = values as z.infer<typeof loginSchema>;
+      result = await signInWithEmail(email, password);
+    } else {
+      const { email, password } = values as z.infer<typeof signupSchema>;
+      result = await signUpWithEmail(email, password);
+    }
+
     setIsLoading(false);
 
-    if (result.success) {
+    if (result.user) {
       router.push("/dashboard");
     } else {
       toast({
