@@ -37,7 +37,7 @@ export default function Home() {
             Marketplace
           </Link>
           <Link href="/matchmaking" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-            Matchmaking
+            Artisan Directory
           </Link>
         </nav>
         <div className="ml-auto lg:ml-6 flex items-center gap-4">
