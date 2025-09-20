@@ -80,19 +80,12 @@ export default function LoginPage() {
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-        setIsLoading(false);
-        router.push("/dashboard");
-    }, 1000);
+    router.push("/dashboard");
   };
 
   async function onSubmit(values: FormSchemaType) {
     setIsLoading(true);
-    
-    setTimeout(() => {
-      setIsLoading(false);
-      router.push("/dashboard");
-    }, 1000);
+    router.push("/dashboard");
   }
 
   return (
