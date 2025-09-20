@@ -1,58 +1,45 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { DollarSign, Users, ShoppingBag, BarChart } from "lucide-react";
+import { Sparkles, PenSquare } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardPage() {
     return (
         <div className="p-6 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                        <DollarSign className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">₹45,231.89</div>
-                        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Customers</CardTitle>
-                        <Users className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+235</div>
-                        <p className="text-xs text-muted-foreground">+18.1% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                        <ShoppingBag className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+1,250</div>
-                        <p className="text-xs text-muted-foreground">+12% from last month</p>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Engagement</CardTitle>
-                        <BarChart className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">78%</div>
-                        <p className="text-xs text-muted-foreground">+5.2% from last week</p>
-                    </CardContent>
-                </Card>
-            </div>
             <Card>
                 <CardHeader>
-                    <CardTitle>Welcome, Artisan!</CardTitle>
+                    <CardTitle className="font-headline text-3xl">Welcome, Artisan!</CardTitle>
                     <CardDescription>Here's a quick overview of your store. Use the AI tools in the sidebar to grow your business.</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-4">
                     <p>You can start by enhancing your product images or by generating compelling stories for your crafts.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Link href="/visual-enhancer">
+                            <Card className="hover:bg-accent/50 transition-colors">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2 text-xl font-headline">
+                                        <Sparkles className="text-primary" />
+                                        AI Visual Enhancer
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-sm text-muted-foreground">Automatically create beautiful lifestyle photos of your products.</p>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                        <Link href="/story-weaver">
+                             <Card className="hover:bg-accent/50 transition-colors">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2 text-xl font-headline">
+                                        <PenSquare className="text-primary" />
+                                        AI Story Weaver
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                     <p className="text-sm text-muted-foreground">Craft compelling descriptions and stories for your products.</p>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                    </div>
                 </CardContent>
             </Card>
         </div>
