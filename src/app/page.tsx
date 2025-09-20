@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Award, MapPin } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { artisans, Artisan } from '@/lib/artisans';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 
@@ -18,6 +19,9 @@ const tools = [
 ];
 
 export default function Home() {
+    const products = PlaceHolderImages.filter(p => p.id.startsWith('product-')).slice(0, 3);
+    const featuredArtisans = artisans.slice(0, 3);
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="px-4 lg:px-6 h-16 flex items-center shadow-sm">
@@ -109,37 +113,67 @@ export default function Home() {
         <section className="w-full py-12 md:py-24 lg:py-32">
             <div className="container px-4 md:px-6">
                  <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Artisans</h2>
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Creations</h2>
                     <Button variant="link" className="text-primary">View All <ArrowRight className="ml-2" /></Button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                  {artisans.map(artisan => (
+                  {products.map(product => (
+                    <Card key={product.id} className="overflow-hidden group">
+                      <CardContent className="p-0">
+                        <Image
+                          src={product.imageUrl}
+                          alt={product.description}
+                          width={400}
+                          height={400}
+                          className="aspect-square object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                          data-ai-hint={product.imageHint}
+                        />
+                      </CardContent>
+                       <CardHeader>
+                          <CardTitle>{product.description}</CardTitle>
+                        </CardHeader>
+                    </Card>
+                  ))}
+                </div>
+            </div>
+        </section>
+
+        <section className="w-full py-12 md:py-24 lg:py-32 border-t">
+            <div className="container px-4 md:px-6">
+                 <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Meet the Artisans</h2>
+                    <Link href="/matchmaking">
+                        <Button variant="link" className="text-primary">View All Artisans<ArrowRight className="ml-2" /></Button>
+                    </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                  {featuredArtisans.map(artisan => (
                     <Link href={`/profile?id=${artisan.id}`} key={artisan.id}>
                       <Card className="overflow-hidden group">
-                        <CardContent className="p-0">
-                          <Image
-                            src={artisan.imageUrl}
-                            alt={`Portrait of ${artisan.name}`}
-                            width={400}
-                            height={400}
-                            className="aspect-square object-cover w-full group-hover:scale-105 transition-transform duration-300"
-                            data-ai-hint={artisan.imageHint}
-                          />
-                        </CardContent>
-                        <CardHeader>
-                          <CardTitle>{artisan.name}</CardTitle>
-                          <p className="text-sm text-muted-foreground">{artisan.craft}</p>
-                           <p className="text-sm text-muted-foreground flex items-center pt-2">
-                            <MapPin className="w-4 h-4 mr-2" />
-                            {artisan.location}
-                           </p>
+                         <CardHeader className="flex-row items-center gap-4">
+                            <Avatar className="w-16 h-16">
+                                <AvatarImage src={artisan.imageUrl} alt={artisan.name} data-ai-hint={artisan.imageHint} />
+                                <AvatarFallback>{artisan.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <CardTitle>{artisan.name}</CardTitle>
+                                <p className="text-sm text-muted-foreground">{artisan.craft}</p>
+                            </div>
                         </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-muted-foreground line-clamp-3">{artisan.story}</p>
+                           <p className="text-sm text-primary flex items-center pt-4 font-semibold">
+                            Read their story
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                           </p>
+                        </CardContent>
                       </Card>
                     </Link>
                   ))}
                 </div>
             </div>
         </section>
+
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-primary/90 text-primary-foreground">
              <div className="container px-4 md:px-6 text-center">
