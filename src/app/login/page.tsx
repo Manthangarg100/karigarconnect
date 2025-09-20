@@ -65,14 +65,14 @@ export default function LoginPage() {
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: isLoginView
-      ? { email: "", password: "" }
+      ? { email: "artisan@example.com", password: "password123" }
       : { name: "", email: "", password: "" },
   });
   
   // Reset form when view changes
   useEffect(() => {
     form.reset(isLoginView
-      ? { email: "", password: "" }
+      ? { email: "artisan@example.com", password: "password123" }
       : { name: "", email: "", password: "" });
   }, [isLoginView, form]);
 
