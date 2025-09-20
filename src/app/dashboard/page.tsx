@@ -1,47 +1,77 @@
+import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Sparkles, PenSquare } from "lucide-react";
-import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { artisans } from '@/lib/artisans';
 
 export default function DashboardPage() {
+    const artisan = artisans.find(a => a.id === 'artisan-1');
+    const products = PlaceHolderImages.filter(p => p.id.startsWith('product-'));
+
+    if (!artisan) {
+        return (
+            <div className="p-6 text-center">
+                <h1 className="text-2xl font-headline">Artisan data not loaded</h1>
+                <p className="text-muted-foreground mt-2">
+                    Dummy artisan data could not be found.
+                </p>
+            </div>
+        );
+    }
+
     return (
-        <div className="p-6 space-y-6">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline text-3xl">Welcome, Artisan!</CardTitle>
-                    <CardDescription>Here's a quick overview of your store. Use the AI tools in the sidebar to grow your business.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                    <p>You can start by enhancing your product images or by generating compelling stories for your crafts.</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Link href="/visual-enhancer">
-                            <Card className="hover:bg-accent/50 transition-colors">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-2 text-xl font-headline">
-                                        <Sparkles className="text-primary" />
-                                        AI Visual Enhancer
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">Automatically create beautiful lifestyle photos of your products.</p>
-                                </CardContent>
-                            </Card>
-                        </Link>
-                        <Link href="/story-weaver">
-                             <Card className="hover:bg-accent/50 transition-colors">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-2 text-xl font-headline">
-                                        <PenSquare className="text-primary" />
-                                        AI Story Weaver
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                     <p className="text-sm text-muted-foreground">Craft compelling descriptions and stories for your products.</p>
-                                </CardContent>
-                            </Card>
-                        </Link>
+        <div className="p-6 space-y-8">
+            <header className="flex flex-col md:flex-row items-center gap-6">
+                <Avatar className="w-24 h-24 border-4 border-primary">
+                    <AvatarImage src={artisan.imageUrl} alt={artisan.name} data-ai-hint={artisan.imageHint} />
+                    <AvatarFallback>{artisan.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="text-center md:text-left">
+                    <h1 className="text-4xl font-headline">Welcome, {artisan.name}!</h1>
+                    <p className="text-muted-foreground mt-1">{artisan.craft} from {artisan.location}</p>
+                    <div className="flex gap-2 mt-4 justify-center md:justify-start">
+                        <Badge>Textiles</Badge>
+                        <Badge variant="secondary">Weaving</Badge>
+                        <Badge variant="secondary">Natural Dyes</Badge>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </header>
+
+            <main className="grid md:grid-cols-3 gap-8">
+                <div className="md:col-span-1 space-y-4">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="font-headline text-2xl">My Story</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-foreground/80 leading-relaxed">
+                                {artisan.story}
+                            </p>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div className="md:col-span-2">
+                    <h2 className="text-2xl font-headline mb-4">My Creations</h2>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                        {products.slice(0, 6).map(product => (
+                            <Card key={product.id} className="overflow-hidden group">
+                                <CardContent className="p-0">
+                                    <Image
+                                        src={product.imageUrl}
+                                        alt={product.description}
+                                        data-ai-hint={product.imageHint}
+                                        width={400}
+                                        height={400}
+                                        className="aspect-square object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }
