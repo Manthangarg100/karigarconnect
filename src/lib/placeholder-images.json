@@ -43,6 +43,18 @@
       "imageHint": "leather bag"
     },
     {
+      "id": "product-7",
+      "description": "A hammered copper water pot.",
+      "imageUrl": "https://picsum.photos/seed/copper/400/400",
+      "imageHint": "copper pot"
+    },
+    {
+      "id": "product-8",
+      "description": "Woven bamboo basket and tray.",
+      "imageUrl": "https://picsum.photos/seed/bamboo/400/400",
+      "imageHint": "bamboo craft"
+    },
+    {
       "id": "artisan-1",
       "description": "Portrait of Aanya Sharma, a female weaver.",
       "imageUrl": "https://picsum.photos/seed/female-weaver/300/300",
