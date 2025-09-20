@@ -37,10 +37,10 @@ export default function Home() {
           </Link>
         </nav>
         <div className="ml-auto lg:ml-6 flex items-center gap-4">
-          <Link href="/login">
+          <Link href="/dashboard">
             <Button variant="ghost" size="sm">Login</Button>
           </Link>
-          <Link href="/login?view=signup">
+          <Link href="/dashboard">
             <Button>Join as Artisan</Button>
           </Link>
         </div>
