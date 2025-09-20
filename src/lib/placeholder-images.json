@@ -44,21 +44,21 @@
     },
     {
       "id": "artisan-1",
-      "description": "Portrait of Aanya Sharma",
-      "imageUrl": "https://picsum.photos/seed/artisan1/300/300",
-      "imageHint": "woman portrait"
+      "description": "Portrait of Aanya Sharma, a female weaver.",
+      "imageUrl": "https://picsum.photos/seed/female-weaver/300/300",
+      "imageHint": "woman weaving"
     },
     {
       "id": "artisan-2",
-      "description": "Portrait of Rohan Das",
-      "imageUrl": "https://picsum.photos/seed/artisan2/300/300",
-      "imageHint": "man portrait"
+      "description": "Portrait of Rohan Das, a male potter.",
+      "imageUrl": "https://picsum.photos/seed/male-potter/300/300",
+      "imageHint": "man pottery"
     },
     {
       "id": "artisan-3",
-      "description": "Portrait of Priya Singh",
-      "imageUrl": "https://picsum.photos/seed/artisan3/300/300",
-      "imageHint": "woman portrait"
+      "description": "Portrait of Priya Singh, a female painter.",
+      "imageUrl": "https://picsum.photos/seed/female-painter/300/300",
+      "imageHint": "woman painting"
     }
   ]
 }
