@@ -34,8 +34,12 @@ export default function Home() {
           </Link>
         </nav>
         <div className="ml-auto lg:ml-6 flex items-center gap-4">
-           <Button variant="ghost" size="sm">Login</Button>
-           <Button>Join as Artisan</Button>
+          <Link href="/dashboard">
+            <Button variant="ghost" size="sm">Login</Button>
+          </Link>
+          <Link href="/dashboard">
+            <Button>Join as Artisan</Button>
+          </Link>
         </div>
       </header>
 
