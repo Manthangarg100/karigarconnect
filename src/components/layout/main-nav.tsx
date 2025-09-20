@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Sidebar,
   SidebarHeader,
@@ -28,9 +28,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { signOut } from '@/app/auth/actions';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { signOut } from '@/lib/firebase/auth';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },

@@ -22,13 +22,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/logo";
 import { Chrome, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { emailLogin, emailSignUp, googleLogin } from "@/app/auth/actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
+import { signInWithEmail, signInWithGoogle, signUpWithEmail } from "@/lib/firebase/auth";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -60,17 +59,27 @@ export default function LoginPage() {
 
 
   const formSchema = isLoginView ? loginSchema : signupSchema;
-  const form = useForm<z.infer<typeof formSchema>>({
+  type FormSchemaType = z.infer<typeof formSchema>;
+  
+  const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: isLoginView
       ? { email: "", password: "" }
       : { name: "", email: "", password: "" },
   });
+  
+  // Reset form when view changes
+  useEffect(() => {
+    form.reset(isLoginView
+      ? { email: "", password: "" }
+      : { name: "", email: "", password: "" });
+  }, [isLoginView, form]);
+
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    const result = await googleLogin();
-    if (result.success) {
+    const result = await signInWithGoogle();
+    if (result.user) {
       router.push("/dashboard");
     } else {
       toast({
@@ -82,15 +91,21 @@ export default function LoginPage() {
     }
   };
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormSchemaType) {
     setIsLoading(true);
-    const result = isLoginView
-      ? await emailLogin(values)
-      : await emailSignUp(values as z.infer<typeof signupSchema>);
+    
+    let result;
+    if (isLoginView) {
+      const { email, password } = values as z.infer<typeof loginSchema>;
+      result = await signInWithEmail(email, password);
+    } else {
+      const { email, password } = values as z.infer<typeof signupSchema>;
+      result = await signUpWithEmail(email, password);
+    }
     
     setIsLoading(false);
 
-    if (result.success) {
+    if (result.user) {
       router.push("/dashboard");
     } else {
       toast({
@@ -123,7 +138,7 @@ export default function LoginPage() {
                 <CardContent>
                     <div className="grid gap-4">
                     <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
-                        <Chrome className="mr-2 h-4 w-4" />
+                        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Chrome className="mr-2 h-4 w-4" /> }
                         Sign in with Google
                     </Button>
                     <div className="relative">
@@ -209,7 +224,6 @@ export default function LoginPage() {
                           const newView = !isLoginView;
                           setIsLoginView(newView);
                           router.replace(newView ? '/login' : '/login?view=signup');
-                          form.reset();
                         }}
                     >
                         {isLoginView ? "Sign up" : "Login"}
