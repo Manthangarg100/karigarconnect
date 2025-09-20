@@ -1,47 +1,40 @@
-
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-// This is a temporary bypass for development.
-// In a real app, you would use Firebase Auth to check the user's session.
-const useMockAuth = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // Default to logged in
-    const [loading, setLoading] = useState(false);
-    
-    // Simulate a check
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setIsLoggedIn(true);
-            setLoading(false);
-        }, 500);
-    }, []);
-
-    return { loading, isLoggedIn };
-};
-
+import { onAuthChanges } from "@/lib/firebase/auth";
+import type { User } from "firebase/auth";
+import { Loader2 } from "lucide-react";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { loading, isLoggedIn } = useMockAuth();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading && !isLoggedIn) {
+    const unsubscribe = onAuthChanges((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!loading && !user) {
       router.replace("/login");
     }
-  }, [loading, isLoggedIn, router]);
+  }, [loading, user, router]);
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
+        <Loader2 className="w-8 h-8 animate-spin" />
       </div>
     );
   }
 
-  if (!isLoggedIn) {
+  if (!user) {
     return null; // or a redirect component
   }
 

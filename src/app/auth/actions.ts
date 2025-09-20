@@ -43,7 +43,7 @@ export async function emailSignUp(values: z.infer<typeof signupSchema>) {
    if (!validated.success) {
        return { success: false, error: "Invalid input." };
    }
-   const { email, password } = validated.data;
+   const { name, email, password } = validated.data;
    const result = await signUpWithEmail(email, password);
    if (result.user) {
     return { success: true, user: result.user };

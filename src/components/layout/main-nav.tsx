@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -29,7 +29,9 @@ import { Separator } from '@/components/ui/separator';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useToast } from '@/hooks/use-toast';
-import { signOut } from '@/lib/firebase/auth';
+import { signOut } from '@/app/auth/actions';
+import { onAuthChanges } from '@/lib/firebase/auth';
+import type { User as FirebaseUser } from 'firebase/auth';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -46,13 +48,13 @@ export function MainNav() {
   const pathname = usePathname();
   const router = useRouter();
   const { toast } = useToast();
+  const [user, setUser] = useState<FirebaseUser | null>(null);
 
-  // In a real app, you would get the user from an auth context
-  const user = {
-    name: 'Aanya Sharma',
-    email: 'aanya@example.com',
-    imageUrl: 'https://picsum.photos/seed/artisan1/100/100',
-  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthChanges(setUser);
+    return () => unsubscribe();
+  }, []);
 
   const handleSignOut = async () => {
     const result = await signOut();
@@ -66,6 +68,9 @@ export function MainNav() {
       });
     }
   }
+
+  const displayName = user?.displayName || user?.email || 'Artisan';
+  const displayInitial = displayName.charAt(0).toUpperCase();
 
   return (
     <Sidebar>
@@ -98,15 +103,16 @@ export function MainNav() {
       <SidebarFooter>
         <Separator className="my-1" />
         <div className="p-2">
+           {user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                  <Button variant="outline" className="w-full justify-start group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:w-auto p-2">
                     <Avatar className="h-6 w-6 mr-2 group-data-[collapsible=icon]:m-0">
-                      <AvatarImage src={user.imageUrl} alt={user.name} />
-                      <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                      <AvatarImage src={user.photoURL || undefined} alt={displayName} />
+                      <AvatarFallback>{displayInitial}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col items-start group-data-[collapsible=icon]:hidden">
-                       <span className="text-sm font-medium">{user.name}</span>
+                       <span className="text-sm font-medium">{displayName}</span>
                     </div>
                   </Button>
               </DropdownMenuTrigger>
@@ -117,6 +123,7 @@ export function MainNav() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+           )}
         </div>
       </SidebarFooter>
     </Sidebar>

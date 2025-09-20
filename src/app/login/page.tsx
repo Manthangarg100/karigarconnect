@@ -27,6 +27,8 @@ import { Chrome, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
+import { emailLogin, emailSignUp, googleLogin } from "@/app/auth/actions";
+
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -77,20 +79,35 @@ export default function LoginPage() {
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
-    // Simulate login
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1000);
+    const result = await googleLogin();
+    setIsLoading(false);
+    if (result.success) {
+        router.push("/dashboard");
+    } else {
+        toast({
+            variant: "destructive",
+            title: "Sign In Failed",
+            description: result.error,
+        });
+    }
   };
 
   async function onSubmit(values: FormSchemaType) {
     setIsLoading(true);
-    
-    // Simulate login/signup
-    setTimeout(() => {
-      setIsLoading(false);
+    const action = isLoginView ? emailLogin : emailSignUp;
+    // @ts-ignore
+    const result = await action(values);
+    setIsLoading(false);
+
+    if (result.success) {
       router.push("/dashboard");
-    }, 1000);
+    } else {
+      toast({
+        variant: "destructive",
+        title: isLoginView ? "Login Failed" : "Sign Up Failed",
+        description: result.error,
+      });
+    }
   }
 
   return (
