@@ -59,18 +59,17 @@ export default function LoginPage() {
 
   const formSchema = isLoginView ? loginSchema : signupSchema;
   
-  // The 'name' field needs to be part of the form state for both login and signup
-  // to avoid controlled/uncontrolled input errors.
   type FormSchemaType = z.infer<typeof signupSchema>;
   
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
-    defaultValues: isLoginView
-      ? { name: "", email: "artisan@example.com", password: "password123" }
-      : { name: "", email: "", password: "" },
+    defaultValues: {
+      name: "",
+      email: "artisan@example.com",
+      password: "password123",
+    }
   });
   
-  // Reset form when view changes
   useEffect(() => {
     form.reset(isLoginView
       ? { name: "", email: "artisan@example.com", password: "password123" }
@@ -90,120 +89,118 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
-        <div className="w-full max-w-sm">
-            <div className="w-full flex justify-start">
-                <BackButton />
-            </div>
-            <div className="flex flex-col items-center gap-4">
-                <Link href="/" className="flex items-center gap-2 mb-4">
-                <Logo />
-                </Link>
-                <Card className="mx-auto max-w-sm w-full">
-                <CardHeader>
-                    <CardTitle className="text-2xl font-headline">
-                    {isLoginView ? "Login" : "Sign Up"}
-                    </CardTitle>
-                    <CardDescription>
-                    Enter your details below to access your artisan dashboard
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="grid gap-4">
-                    <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
-                        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Chrome className="mr-2 h-4 w-4" /> }
-                        Sign in with Google
-                    </Button>
-                    <div className="relative">
-                        <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t" />
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-background px-2 text-muted-foreground">
-                            Or continue with
-                        </span>
-                        </div>
+        <div className="w-full max-w-sm absolute top-4 left-4">
+            <BackButton />
+        </div>
+        <div className="flex flex-col items-center gap-4 w-full max-w-sm">
+            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Logo />
+            </Link>
+            <Card className="w-full">
+            <CardHeader>
+                <CardTitle className="text-2xl font-headline">
+                {isLoginView ? "Login" : "Sign Up"}
+                </CardTitle>
+                <CardDescription>
+                Enter your details below to access your artisan dashboard
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="grid gap-4">
+                <Button variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
+                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Chrome className="mr-2 h-4 w-4" /> }
+                    Sign in with Google
+                </Button>
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
                     </div>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        {!isLoginView && (
-                            <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Your Name" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                                </FormItem>
-                            )}
-                            />
+                    <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        Or continue with
+                    </span>
+                    </div>
+                </div>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    {!isLoginView && (
+                        <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input placeholder="Your Name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                            </FormItem>
                         )}
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Email</FormLabel>
-                                <FormControl>
-                                <Input
-                                    type="email"
-                                    placeholder="m@example.com"
-                                    {...field}
-                                />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                            <FormItem>
-                                <div className="flex items-center">
-                                <FormLabel>Password</FormLabel>
-                                {isLoginView && (
-                                    <Link
-                                    href="#"
-                                    className="ml-auto inline-block text-sm underline"
-                                    >
-                                    Forgot your password?
-                                    </Link>
-                                )}
-                                </div>
-                                <FormControl>
-                                <Input type="password" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
+                    )}
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                            <Input
+                                type="email"
+                                placeholder="m@example.com"
+                                {...field}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                        <FormItem>
+                            <div className="flex items-center">
+                            <FormLabel>Password</FormLabel>
+                            {isLoginView && (
+                                <Link
+                                href="#"
+                                className="ml-auto inline-block text-sm underline"
+                                >
+                                Forgot your password?
+                                </Link>
                             )}
-                        />
-                        <Button type="submit" className="w-full" disabled={isLoading}>
-                            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                            {isLoginView ? "Login" : "Sign Up"}
-                        </Button>
-                        </form>
-                    </Form>
-                    </div>
-                    <div className="mt-4 text-center text-sm">
-                    {isLoginView ? "Don't have an account?" : "Already have an account?"}{" "}
-                    <Button
-                        variant="link"
-                        className="p-0 h-auto"
-                        onClick={() => {
-                          const newView = !isLoginView;
-                          setIsLoginView(newView);
-                          router.replace(newView ? '/login' : '/login?view=signup');
-                        }}
-                    >
-                        {isLoginView ? "Sign up" : "Login"}
+                            </div>
+                            <FormControl>
+                            <Input type="password" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                        )}
+                    />
+                    <Button type="submit" className="w-full" disabled={isLoading}>
+                        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isLoginView ? "Login" : "Sign Up"}
                     </Button>
-                    </div>
-                </CardContent>
-                </Card>
-            </div>
+                    </form>
+                </Form>
+                </div>
+                <div className="mt-4 text-center text-sm">
+                {isLoginView ? "Don't have an account?" : "Already have an account?"}{" "}
+                <Button
+                    variant="link"
+                    className="p-0 h-auto"
+                    onClick={() => {
+                      const newView = !isLoginView;
+                      setIsLoginView(newView);
+                      router.replace(newView ? '/login' : '/login?view=signup');
+                    }}
+                >
+                    {isLoginView ? "Sign up" : "Login"}
+                </Button>
+                </div>
+            </CardContent>
+            </Card>
         </div>
     </div>
   );
