@@ -21,11 +21,13 @@ import {
   User,
   DollarSign,
   Palette,
+  Home,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
 const navItems = [
+  { href: '/', label: 'Home', icon: Home },
   { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
   { href: '/visual-enhancer', label: 'AI Visual Enhancer', icon: Sparkles },
   { href: '/story-weaver', label: 'AI Story Weaver', icon: PenSquare },
@@ -57,12 +59,9 @@ export function MainNav() {
                 <SidebarMenuButton
                   isActive={pathname === item.href}
                   tooltip={item.label}
-                  asChild
                 >
-                  <div>
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </div>
+                  <item.icon />
+                  <span>{item.label}</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
