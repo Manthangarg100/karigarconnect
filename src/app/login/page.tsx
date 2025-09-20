@@ -58,19 +58,22 @@ export default function LoginPage() {
 
 
   const formSchema = isLoginView ? loginSchema : signupSchema;
-  type FormSchemaType = z.infer<typeof formSchema>;
+  
+  // The 'name' field needs to be part of the form state for both login and signup
+  // to avoid controlled/uncontrolled input errors.
+  type FormSchemaType = z.infer<typeof signupSchema>;
   
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: isLoginView
-      ? { email: "artisan@example.com", password: "password123" }
+      ? { name: "", email: "artisan@example.com", password: "password123" }
       : { name: "", email: "", password: "" },
   });
   
   // Reset form when view changes
   useEffect(() => {
     form.reset(isLoginView
-      ? { email: "artisan@example.com", password: "password123" }
+      ? { name: "", email: "artisan@example.com", password: "password123" }
       : { name: "", email: "", password: "" });
   }, [isLoginView, form]);
 
