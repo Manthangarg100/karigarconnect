@@ -40,7 +40,7 @@ export default function Home() {
           <Link href="/login">
             <Button variant="ghost" size="sm">Login</Button>
           </Link>
-          <Link href="/login">
+          <Link href="/login?view=signup">
             <Button>Join as Artisan</Button>
           </Link>
         </div>

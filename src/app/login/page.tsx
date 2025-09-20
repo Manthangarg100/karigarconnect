@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +27,7 @@ import { Logo } from "@/components/logo";
 import { Chrome, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { emailLogin, emailSignUp, googleLogin } from "@/app/auth/actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BackButton } from "@/components/back-button";
 
 const loginSchema = z.object({
@@ -46,10 +46,18 @@ const signupSchema = z.object({
 });
 
 export default function LoginPage() {
-  const [isLoginView, setIsLoginView] = useState(true);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const view = searchParams.get('view');
+
+  const [isLoginView, setIsLoginView] = useState(view !== 'signup');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const router = useRouter();
+
+  useEffect(() => {
+    setIsLoginView(view !== 'signup');
+  }, [view]);
+
 
   const formSchema = isLoginView ? loginSchema : signupSchema;
   const form = useForm<z.infer<typeof formSchema>>({
@@ -198,8 +206,10 @@ export default function LoginPage() {
                         variant="link"
                         className="p-0 h-auto"
                         onClick={() => {
-                        setIsLoginView(!isLoginView);
-                        form.reset();
+                          const newView = !isLoginView;
+                          setIsLoginView(newView);
+                          router.replace(newView ? '/login' : '/login?view=signup');
+                          form.reset();
                         }}
                     >
                         {isLoginView ? "Sign up" : "Login"}
