@@ -26,13 +26,13 @@ export default function Home() {
           <span className="sr-only">KarigarConnect</span>
         </Link>
         <nav className="ml-auto hidden lg:flex gap-6 items-center">
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="/" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Home
           </Link>
           <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Marketplace
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="/matchmaking" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Matchmaking
           </Link>
         </nav>
