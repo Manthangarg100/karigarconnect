@@ -1,9 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Award } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Award, MapPin } from 'lucide-react';
 import { Logo } from '@/components/logo';
+import { artisans, Artisan } from '@/lib/artisans';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 
 const tools = [
     { icon: Mic, title: 'Voice-to-Storefront', href: '/voice-storefront' },
@@ -109,7 +112,32 @@ export default function Home() {
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Artisans</h2>
                     <Button variant="link" className="text-primary">View All <ArrowRight className="ml-2" /></Button>
                 </div>
-                <p className="text-center text-muted-foreground">Loading artisans...</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                  {artisans.map(artisan => (
+                    <Link href={`/profile?id=${artisan.id}`} key={artisan.id}>
+                      <Card className="overflow-hidden group">
+                        <CardContent className="p-0">
+                          <Image
+                            src={artisan.imageUrl}
+                            alt={`Portrait of ${artisan.name}`}
+                            width={400}
+                            height={400}
+                            className="aspect-square object-cover w-full group-hover:scale-105 transition-transform duration-300"
+                            data-ai-hint={artisan.imageHint}
+                          />
+                        </CardContent>
+                        <CardHeader>
+                          <CardTitle>{artisan.name}</CardTitle>
+                          <p className="text-sm text-muted-foreground">{artisan.craft}</p>
+                           <p className="text-sm text-muted-foreground flex items-center pt-2">
+                            <MapPin className="w-4 h-4 mr-2" />
+                            {artisan.location}
+                           </p>
+                        </CardHeader>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
             </div>
         </section>
 

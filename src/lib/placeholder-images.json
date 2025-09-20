@@ -41,6 +41,24 @@
       "description": "A leather handcrafted bag.",
       "imageUrl": "https://picsum.photos/seed/product6/400/400",
       "imageHint": "leather bag"
+    },
+    {
+      "id": "artisan-1",
+      "description": "Portrait of Aanya Sharma",
+      "imageUrl": "https://picsum.photos/seed/artisan1/300/300",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "artisan-2",
+      "description": "Portrait of Rohan Das",
+      "imageUrl": "https://picsum.photos/seed/artisan2/300/300",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "artisan-3",
+      "description": "Portrait of Priya Singh",
+      "imageUrl": "https://picsum.photos/seed/artisan3/300/300",
+      "imageHint": "woman portrait"
     }
   ]
 }

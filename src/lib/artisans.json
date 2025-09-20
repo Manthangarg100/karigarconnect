@@ -1,0 +1,25 @@
+{
+    "artisans": [
+        {
+            "id": "artisan-1",
+            "name": "Aanya Sharma",
+            "craft": "Master Weaver",
+            "location": "Varanasi, Uttar Pradesh",
+            "story": "From the vibrant heart of Varanasi, I bring you threads of tradition woven into contemporary tales. For generations, my family has practiced the art of weaving, a legacy passed down from my grandmother. Each piece is a canvas where I paint with threads, using ancient techniques and natural dyes sourced from my own garden. My craft is not just a profession; it's a prayer, a connection to my roots, and a story I want to share with the world."
+        },
+        {
+            "id": "artisan-2",
+            "name": "Rohan Das",
+            "craft": "Pottery & Ceramics",
+            "location": "Jaipur, Rajasthan",
+            "story": "The earthy smell of clay is the first scent I remember from my childhood. In Jaipur, the Pink City, my family has been shaping clay into beautiful pottery for over a century. I find inspiration in the majestic forts and palaces of Rajasthan, and my work reflects the intricate patterns and vibrant colors of my homeland. Each pot I create holds a piece of my heritage."
+        },
+        {
+            "id": "artisan-3",
+            "name": "Priya Singh",
+            "craft": "Madhubani Painting",
+            "location": "Madhubani, Bihar",
+            "story": "I paint stories from myth and nature. My art comes from Madhubani, a place where every home's wall is a canvas. Taught by my mother and grandmother, I use natural pigments and traditional tools like twigs and fingers. My paintings are a celebration of life, filled with symbols of prosperity, love, and faith. Through my art, I keep the stories of our ancestors alive for the next generation to cherish."
+        }
+    ]
+}
