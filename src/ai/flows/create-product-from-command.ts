@@ -77,8 +77,11 @@ const createProductFromCommandFlow = ai.defineFlow(
 
     // 3. Generate a product image from the description
     const { media } = await ai.generate({
-        model: 'googleai/imagen-4.0-fast-generate-001',
+        model: 'googleai/gemini-2.5-flash-image-preview',
         prompt: `A photorealistic, high-quality lifestyle image of a ${productDetails.name}, described as: ${description}. The product is the central focus, on a clean, modern background.`,
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'],
+        }
     });
 
     if (!media?.url) {
