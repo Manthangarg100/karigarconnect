@@ -58,106 +58,108 @@ export function TranslatorClient() {
 
   return (
     <div className="grid md:grid-cols-2 gap-8 items-start">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <FormField
-            control={form.control}
-            name="textToTranslate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Text to Translate</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Describe your product's story, materials, and significance..."
-                    className="min-h-[150px] resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="targetAudience"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Target Audience</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., 'American art collector', 'Japanese tourist'" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-           <FormField
-            control={form.control}
-            name="targetLanguage"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Target Language</FormLabel>
-                <FormControl>
-                  <Input placeholder="e.g., 'English', 'French', 'Japanese'" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <Sparkles className="mr-2 h-4 w-4" />
-            )}
-            Translate & Adapt
-          </Button>
-        </form>
-      </Form>
+      <div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="textToTranslate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Text to Translate</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Describe your product's story, materials, and significance..."
+                      className="min-h-[150px] resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="targetAudience"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Target Audience</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., 'American art collector', 'Japanese tourist'" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="targetLanguage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Target Language</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., 'English', 'French', 'Japanese'" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" disabled={isLoading} className="w-full">
+              {isLoading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Sparkles className="mr-2 h-4 w-4" />
+              )}
+              Translate & Adapt
+            </Button>
+          </form>
+        </Form>
+      </div>
 
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-center md:text-left">AI-Powered Adaptation</h3>
         <Card className="min-h-[400px] bg-secondary/50">
-            <CardContent className="p-6">
-             {isLoading ? (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground pt-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <span className="mt-4">Adapting your story...</span>
-                </div>
-              ) : translationResult ? (
-                <div className="space-y-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="text-lg">Culturally Adapted Text</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-foreground/90">{translationResult.culturallyAdaptedText}</p>
-                        </CardContent>
-                    </Card>
-                     <Card>
-                        <CardHeader>
-                            <CardTitle className="text-base">Cultural Notes</CardTitle>
-                            <FormDescription>An explanation of the changes made by the AI.</FormDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">{translationResult.culturalNotes}</p>
-                        </CardContent>
-                    </Card>
-                     <Card>
-                        <CardHeader>
-                            <CardTitle className="text-base">Direct Translation</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm text-muted-foreground">{translationResult.directTranslation}</p>
-                        </CardContent>
-                    </Card>
-                </div>
+          <CardContent className="p-6">
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground pt-12">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                <span className="mt-4">Adapting your story...</span>
+              </div>
+            ) : translationResult ? (
+              <div className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Culturally Adapted Text</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-foreground/90">{translationResult.culturallyAdaptedText}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Cultural Notes</CardTitle>
+                    <CardDescription>An explanation of the changes made by the AI.</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">{translationResult.culturalNotes}</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Direct Translation</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">{translationResult.directTranslation}</p>
+                  </CardContent>
+                </Card>
+              </div>
             ) : (
-                <div className="flex flex-col items-center justify-center h-full text-muted-foreground pt-12 text-center">
-                    <Languages className="h-10 w-10" />
-                    <p className="mt-4">Your culturally-aware translation will appear here.</p>
-                </div>
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground pt-12 text-center">
+                <Languages className="h-10 w-10" />
+                <p className="mt-4">Your culturally-aware translation will appear here.</p>
+              </div>
             )}
-            </CardContent>
+          </CardContent>
         </Card>
       </div>
     </div>
