@@ -36,6 +36,16 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+      serverActionsBodySizeLimit: '2mb',
+    },
+  },
+  httpAgentOptions: {
+    keepAlive: true,
+  },
+  serverExternalPackages: ['sharp', 'onnxruntime-node'],
 };
 
 export default nextConfig;

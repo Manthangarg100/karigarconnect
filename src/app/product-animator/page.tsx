@@ -1,20 +1,20 @@
-import { ImageStudioClient } from '@/components/image-studio-client';
+import { ProductAnimatorClient } from '@/components/product-animator-client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { BackButton } from '@/components/back-button';
 
-export default function ImageStudioPage() {
+export default function ProductAnimatorPage() {
   return (
     <div className="p-6">
       <BackButton />
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-3xl">AI Image Studio</CardTitle>
+          <CardTitle className="font-headline text-3xl">AI Product Animator</CardTitle>
           <CardDescription>
-            Describe the product image you want to create. Be as specific as possible for the best results.
+            Bring your product to life. Describe a short video you want to create, and the AI will generate it for you.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ImageStudioClient />
+          <ProductAnimatorClient />
         </CardContent>
       </Card>
     </div>
