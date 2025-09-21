@@ -8,3 +8,4 @@ import '@/ai/flows/grant-advisor.ts';
 import '@/ai/flows/create-product-from-command.ts';
 import '@/ai/flows/generate-video-from-text.ts';
 import '@/ai/flows/dynamic-price-advisor.ts';
+import '@/ai/flows/cultural-translator.ts';
