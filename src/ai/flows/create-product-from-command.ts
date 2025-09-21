@@ -65,8 +65,8 @@ const createProductFromCommandFlow = ai.defineFlow(
   async (input) => {
     // 1. Extract structured details from the voice command
     const { output: productDetails } = await extractDetailsPrompt(input);
-    if (!productDetails) {
-        throw new Error("Could not extract product details from the command.");
+    if (!productDetails?.name || !productDetails?.keywords) {
+        throw new Error("Could not extract product name and keywords from the command. Please try being more descriptive.");
     }
     
     // 2. Generate a compelling product description
