@@ -7,12 +7,12 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { culturalTranslatorAction } from '@/app/actions';
 import type { CulturalTranslatorOutput } from '@/ai/flows/cultural-translator';
 import { Loader2, Sparkles, Languages } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const formSchema = z.object({
   textToTranslate: z.string().min(10, { message: 'Please enter at least 10 characters to translate.' }),
