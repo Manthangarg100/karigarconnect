@@ -6,6 +6,7 @@ import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/ge
 import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
 import { createProductFromCommand, CreateProductFromCommandInput } from "@/ai/flows/create-product-from-command";
 import { generateVideoFromText, GenerateVideoFromTextInput } from "@/ai/flows/generate-video-from-text";
+import { dynamicPriceAdvisor, DynamicPriceAdvisorInput } from "@/ai/flows/dynamic-price-advisor";
 
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
@@ -66,5 +67,15 @@ export async function generateVideoFromTextAction(input: GenerateVideoFromTextIn
     } catch (error: any) {
         console.error("Video generation from text failed:", error);
         return { success: false, error: error.message || "Failed to generate video from text." };
+    }
+}
+
+export async function dynamicPriceAdvisorAction(input: DynamicPriceAdvisorInput) {
+    try {
+        const result = await dynamicPriceAdvisor(input);
+        return { success: true, data: result };
+    } catch (error: any) {
+        console.error("Dynamic price advisor failed:", error);
+        return { success: false, error: error.message || "Failed to get price advice." };
     }
 }

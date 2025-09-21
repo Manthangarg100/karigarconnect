@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 const tools = [
     { icon: Mic, title: 'Voice-to-Storefront', href: '/voice-storefront' },
     { icon: BookOpen, title: 'AI Storytelling', href: '/story-weaver' },
-    { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor', href: '#' },
+    { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor', href: '/dashboard/dynamic-pricing' },
     { icon: Languages, title: 'Cross-Cultural Translator', href: '#' },
     { icon: Megaphone, title: 'Marketing Assistant', href: '/marketing-tool' },
     { icon: Award, title: 'Grant & Scheme Advisor', href: '/grant-advisor' },
