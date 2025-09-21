@@ -6,3 +6,4 @@ import '@/ai/flows/generate-product-descriptions.ts';
 import '@/ai/flows/generate-marketing-copy.ts';
 import '@/ai/flows/grant-advisor.ts';
 import '@/ai/flows/create-product-from-command.ts';
+import '@/ai/flows/generate-image-from-text.ts';

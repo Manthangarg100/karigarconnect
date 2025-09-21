@@ -1,20 +1,20 @@
-import { VisualEnhancerClient } from '@/components/visual-enhancer-client';
+import { ImageStudioClient } from '@/components/image-studio-client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { BackButton } from '@/components/back-button';
 
-export default function VisualEnhancerPage() {
+export default function ImageStudioPage() {
   return (
     <div className="p-6">
       <BackButton />
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-3xl">AI Visual Enhancer</CardTitle>
+          <CardTitle className="font-headline text-3xl">AI Image Studio</CardTitle>
           <CardDescription>
-            Upload a product photo to automatically remove the background, adjust lighting, and generate a lifestyle mockup.
+            Describe the product image you want to create. Be as specific as possible for the best results.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <VisualEnhancerClient />
+          <ImageStudioClient />
         </CardContent>
       </Card>
     </div>

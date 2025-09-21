@@ -5,6 +5,8 @@ import { generateProductDescription, GenerateProductDescriptionInput } from "@/a
 import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/generate-marketing-copy";
 import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
 import { createProductFromCommand, CreateProductFromCommandInput } from "@/ai/flows/create-product-from-command";
+import { generateImageFromText, GenerateImageFromTextInput } from "@/ai/flows/generate-image-from-text";
+
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
     try {
@@ -54,5 +56,15 @@ export async function createProductFromCommandAction(input: CreateProductFromCom
     } catch (error: any) {
         console.error("Create product from command failed:", error);
         return { success: false, error: error.message || "Failed to create product from command." };
+    }
+}
+
+export async function generateImageFromTextAction(input: GenerateImageFromTextInput) {
+    try {
+        const result = await generateImageFromText(input);
+        return { success: true, data: result };
+    } catch (error: any) {
+        console.error("Image generation from text failed:", error);
+        return { success: false, error: error.message || "Failed to generate image from text." };
     }
 }
