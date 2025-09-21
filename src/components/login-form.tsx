@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,7 +43,7 @@ const signupSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters." }),
 });
 
-export function LoginForm() {
+function LoginComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const view = searchParams.get('view');
@@ -204,4 +204,12 @@ export function LoginForm() {
         </div>
     </div>
   );
+}
+
+export function LoginForm() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginComponent />
+    </Suspense>
+  )
 }
