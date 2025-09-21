@@ -10,7 +10,7 @@ export async function enhanceImageAction(input: EnhanceProductImageInput) {
         const result = await enhanceProductImage(input);
         return { success: true, data: result };
     } catch (error) {
-        console.error(error);
+        console.error("Image enhancement failed:", error);
         return { success: false, error: "Failed to enhance image." };
     }
 }
@@ -20,7 +20,7 @@ export async function generateDescriptionAction(input: GenerateProductDescriptio
         const result = await generateProductDescription(input);
         return { success: true, data: result };
     } catch (error) {
-        console.error(error);
+        console.error("Description generation failed:", error);
         return { success: false, error: "Failed to generate description." };
     }
 }
@@ -30,7 +30,7 @@ export async function generateMarketingCopyAction(input: GenerateMarketingCopyIn
         const result = await generateMarketingCopy(input);
         return { success: true, data: result };
     } catch (error) {
-        console.error(error);
+        console.error("Marketing copy generation failed:", error);
         return { success: false, error: "Failed to generate marketing copy." };
     }
 }
@@ -40,7 +40,7 @@ export async function grantAdvisorAction(input: GrantAdvisorInput) {
         const result = await grantAdvisor(input);
         return { success: true, data: result };
     } catch (error) {
-        console.error(error);
+        console.error("Grant advisor failed:", error);
         return { success: false, error: "Failed to generate advice." };
     }
 }

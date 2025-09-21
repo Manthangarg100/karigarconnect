@@ -50,7 +50,7 @@ const enhanceProductImageFlow = ai.defineFlow(
       });
 
     if (!media?.url) {
-        throw new Error('Image generation failed to return a valid image.');
+        throw new Error('Image generation failed. The AI model did not return a valid image. This may be due to a safety policy violation or an issue with the provided image.');
     }
 
     return { enhancedPhotoDataUri: media.url };
