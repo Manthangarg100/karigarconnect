@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -8,8 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { BackButton } from '@/components/back-button';
 import { artisans } from '@/lib/artisans';
+import { Loader2 } from 'lucide-react';
 
-export default function ArtisanProfilePage() {
+function ArtisanProfile() {
     const searchParams = useSearchParams();
     const artisanId = searchParams.get('id');
     const artisan = artisans.find(a => a.id === artisanId);
@@ -80,4 +82,12 @@ export default function ArtisanProfilePage() {
       </main>
     </div>
   );
+}
+
+export default function ArtisanProfilePage() {
+    return (
+        <Suspense fallback={<div className="flex h-screen w-full items-center justify-center"><Loader2 className="animate-spin" /></div>}>
+            <ArtisanProfile />
+        </Suspense>
+    )
 }
