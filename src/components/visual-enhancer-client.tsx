@@ -10,6 +10,9 @@ import { enhanceImageAction } from '@/app/actions';
 import { Loader2, Upload, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
+const MAX_FILE_SIZE_MB = 1;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
 export function VisualEnhancerClient() {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [enhancedImage, setEnhancedImage] = useState<string | null>(null);
@@ -19,11 +22,11 @@ export function VisualEnhancerClient() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (file.size > 4 * 1024 * 1024) { // 4MB limit
+      if (file.size > MAX_FILE_SIZE_BYTES) {
         toast({
           variant: 'destructive',
           title: 'File too large',
-          description: 'Please upload an image smaller than 4MB.',
+          description: `Please upload an image smaller than ${MAX_FILE_SIZE_MB}MB.`,
         });
         return;
       }
@@ -63,7 +66,7 @@ export function VisualEnhancerClient() {
       toast({
         variant: 'destructive',
         title: 'Enhancement Failed',
-        description: result.error || 'An unknown error occurred.',
+        description: result.error || 'The AI model failed to generate an image. This could be due to a safety policy violation or an issue with the provided image. Please try a different image.',
       });
     }
   };
@@ -71,7 +74,7 @@ export function VisualEnhancerClient() {
   return (
     <div className="space-y-6">
       <div className="grid w-full items-center gap-1.5">
-        <Label htmlFor="picture">Product Photo</Label>
+        <Label htmlFor="picture">Product Photo (Max {MAX_FILE_SIZE_MB}MB)</Label>
         <div className="flex gap-2">
             <Input id="picture" type="file" accept="image/*" onChange={handleFileChange} className="cursor-pointer max-w-sm"/>
             <Button onClick={handleEnhance} disabled={!originalImage || isLoading}>

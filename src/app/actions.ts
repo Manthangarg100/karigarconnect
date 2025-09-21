@@ -9,9 +9,9 @@ export async function enhanceImageAction(input: EnhanceProductImageInput) {
     try {
         const result = await enhanceProductImage(input);
         return { success: true, data: result };
-    } catch (error) {
+    } catch (error: any) {
         console.error("Image enhancement failed:", error);
-        return { success: false, error: "Failed to enhance image." };
+        return { success: false, error: error.message || "Failed to enhance image." };
     }
 }
 
