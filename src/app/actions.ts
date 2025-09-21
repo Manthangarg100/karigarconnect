@@ -6,6 +6,7 @@ import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/ge
 import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
 import { createProductFromCommand, CreateProductFromCommandInput } from "@/ai/flows/create-product-from-command";
 import { dynamicPriceAdvisor, DynamicPriceAdvisorInput } from "@/ai/flows/dynamic-price-advisor";
+import { generateSocialCopy, GenerateSocialCopyInput } from "@/ai/flows/generate-social-copy";
 
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
@@ -66,5 +67,15 @@ export async function dynamicPriceAdvisorAction(input: DynamicPriceAdvisorInput)
     } catch (error: any) {
         console.error("Dynamic price advisor failed:", error);
         return { success: false, error: error.message || "Failed to get price advice." };
+    }
+}
+
+export async function generateSocialCopyAction(input: GenerateSocialCopyInput) {
+    try {
+        const result = await generateSocialCopy(input);
+        return { success: true, data: result };
+    } catch (error: any) {
+        console.error("Social copy generation failed:", error);
+        return { success: false, error: error.message || "Failed to generate social copy." };
     }
 }

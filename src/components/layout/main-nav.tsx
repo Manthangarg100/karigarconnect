@@ -26,6 +26,7 @@ import {
   Award,
   CircleDollarSign,
   Languages,
+  TrendingUp,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -41,6 +42,7 @@ const navItems = [
   { href: '/marketing-tool', label: 'AI Marketing Assistant', icon: Megaphone },
   { href: '/grant-advisor', label: 'Grant Advisor', icon: Award },
   { href: '/dashboard/dynamic-pricing', label: 'Dynamic Pricing', icon: CircleDollarSign },
+  { href: '/dashboard/social-copy-generator', label: 'Social Copy Generator', icon: TrendingUp },
   { href: '/dashboard/translator', label: 'Cross-Cultural Translator', icon: Languages },
   { href: '/profile', label: 'Artisan Profile', icon: User },
   { href: '/transactions', label: 'Transactions', icon: DollarSign },

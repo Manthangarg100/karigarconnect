@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Award, MapPin } from 'lucide-react';
+import { ArrowRight, Mic, BookOpen, CircleDollarSign, Languages, Megaphone, Award, MapPin, TrendingUp } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { artisans, Artisan } from '@/lib/artisans';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -11,8 +11,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const tools = [
     { icon: Mic, title: 'Voice-to-Storefront', href: '/voice-storefront' },
-    { icon: BookOpen, title: 'AI Storytelling', href: '/story-weaver' },
+    { icon: BookOpen, title: 'AI Story Weaver', href: '/story-weaver' },
     { icon: CircleDollarSign, title: 'Dynamic Pricing Advisor', href: '/dashboard/dynamic-pricing' },
+    { icon: TrendingUp, title: 'Social Copy Generator', href: '/dashboard/social-copy-generator' },
     { icon: Languages, title: 'Cross-Cultural Translator', href: '/dashboard/translator' },
     { icon: Megaphone, title: 'Marketing Assistant', href: '/marketing-tool' },
     { icon: Award, title: 'Grant & Scheme Advisor', href: '/grant-advisor' },
