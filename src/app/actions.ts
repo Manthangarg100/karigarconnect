@@ -5,9 +5,7 @@ import { generateProductDescription, GenerateProductDescriptionInput } from "@/a
 import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/generate-marketing-copy";
 import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
 import { createProductFromCommand, CreateProductFromCommandInput } from "@/ai/flows/create-product-from-command";
-import { generateVideoFromText, GenerateVideoFromTextInput } from "@/ai/flows/generate-video-from-text";
 import { dynamicPriceAdvisor, DynamicPriceAdvisorInput } from "@/ai/flows/dynamic-price-advisor";
-import { culturalTranslator, CulturalTranslatorInput } from "@/ai/flows/cultural-translator";
 
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
@@ -61,16 +59,6 @@ export async function createProductFromCommandAction(input: CreateProductFromCom
     }
 }
 
-export async function generateVideoFromTextAction(input: GenerateVideoFromTextInput) {
-    try {
-        const result = await generateVideoFromText(input);
-        return { success: true, data: result };
-    } catch (error: any) {
-        console.error("Video generation from text failed:", error);
-        return { success: false, error: error.message || "Failed to generate video from text." };
-    }
-}
-
 export async function dynamicPriceAdvisorAction(input: DynamicPriceAdvisorInput) {
     try {
         const result = await dynamicPriceAdvisor(input);
@@ -78,15 +66,5 @@ export async function dynamicPriceAdvisorAction(input: DynamicPriceAdvisorInput)
     } catch (error: any) {
         console.error("Dynamic price advisor failed:", error);
         return { success: false, error: error.message || "Failed to get price advice." };
-    }
-}
-
-export async function culturalTranslatorAction(input: CulturalTranslatorInput) {
-    try {
-        const result = await culturalTranslator(input);
-        return { success: true, data: result };
-    } catch (error: any) {
-        console.error("Cultural translator failed:", error);
-        return { success: false, error: error.message || "Failed to get translation." };
     }
 }

@@ -24,9 +24,7 @@ import {
   Home,
   LogOut,
   Award,
-  Film,
   CircleDollarSign,
-  Languages,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -37,13 +35,11 @@ import { useToast } from '@/hooks/use-toast';
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/dashboard', label: 'Dashboard', icon: LayoutGrid },
-  { href: '/dashboard/product-animator', label: 'AI Product Animator', icon: Film },
   { href: '/story-weaver', label: 'AI Story Weaver', icon: PenSquare },
   { href: '/voice-storefront', label: 'Voice-to-Storefront', icon: Mic },
   { href: '/marketing-tool', label: 'AI Marketing Assistant', icon: Megaphone },
   { href: '/grant-advisor', label: 'Grant Advisor', icon: Award },
   { href: '/dashboard/dynamic-pricing', label: 'Dynamic Pricing', icon: CircleDollarSign },
-  { href: '/dashboard/translator', label: 'Cultural Translator', icon: Languages },
   { href: '/profile', label: 'Artisan Profile', icon: User },
   { href: '/transactions', label: 'Transactions', icon: DollarSign },
 ];
