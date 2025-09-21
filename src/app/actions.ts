@@ -4,9 +4,11 @@ import { enhanceProductImage, EnhanceProductImageInput } from "@/ai/flows/enhanc
 import { generateProductDescription, GenerateProductDescriptionInput } from "@/ai/flows/generate-product-descriptions";
 import { generateMarketingCopy, GenerateMarketingCopyInput } from "@/ai/flows/generate-marketing-copy";
 import { grantAdvisor, GrantAdvisorInput } from "@/ai/flows/grant-advisor";
+import { createProductFromCommand, CreateProductFromCommandInput } from "@/ai/flows/create-product-from-command";
 
 export async function enhanceImageAction(input: EnhanceProductImageInput) {
     try {
+        console.log("Enhancing image with input:", input.photoDataUri.substring(0, 50));
         const result = await enhanceProductImage(input);
         return { success: true, data: result };
     } catch (error: any) {
@@ -42,5 +44,15 @@ export async function grantAdvisorAction(input: GrantAdvisorInput) {
     } catch (error) {
         console.error("Grant advisor failed:", error);
         return { success: false, error: "Failed to generate advice." };
+    }
+}
+
+export async function createProductFromCommandAction(input: CreateProductFromCommandInput) {
+    try {
+        const result = await createProductFromCommand(input);
+        return { success: true, data: result };
+    } catch (error: any) {
+        console.error("Create product from command failed:", error);
+        return { success: false, error: error.message || "Failed to create product from command." };
     }
 }
