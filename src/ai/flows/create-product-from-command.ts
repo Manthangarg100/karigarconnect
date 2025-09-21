@@ -8,7 +8,6 @@
  */
 
 import { ai } from '@/ai/genkit';
-import { generateProductDescription } from './generate-product-descriptions';
 import { z } from 'genkit';
 
 // Define Input and Output Schemas using Zod
@@ -24,33 +23,6 @@ const CreateProductFromCommandOutputSchema = z.object({
 });
 export type CreateProductFromCommandOutput = z.infer<typeof CreateProductFromCommandOutputSchema>;
 
-// Define schema for extracting product details from the command
-const ProductDetailsSchema = z.object({
-    name: z.string().describe("The name of the product, extracted from the command."),
-    keywords: z.string().describe("A comma-separated list of keywords describing the product's features, materials, and style."),
-});
-
-// Define a prompt to extract structured data from the voice command
-const extractDetailsPrompt = ai.definePrompt({
-    name: 'extractProductDetailsPrompt',
-    input: { schema: CreateProductFromCommandInputSchema },
-    output: { schema: ProductDetailsSchema },
-    prompt: `You are an expert at understanding product descriptions. Extract the product name and descriptive keywords from the following user command.
-
-    Command: {{{command}}}
-
-    Extract the product name and a comma-separated list of descriptive keywords.`,
-});
-
-// Define a prompt for generating an image based on a description
-const generateImagePrompt = ai.definePrompt({
-    name: 'generateProductImageFromDescription',
-    input: { schema: z.object({ description: z.string() }) },
-    output: { schema: z.object({ imageUrl: z.string() }) },
-    prompt: `Generate a photorealistic, high-quality lifestyle image of the following product. The product should be the main focus, presented in an appealing setting.
-    
-    Product Description: {{{description}}}`,
-});
 
 export async function createProductFromCommand(input: CreateProductFromCommandInput): Promise<CreateProductFromCommandOutput> {
   return createProductFromCommandFlow(input);
@@ -62,37 +34,28 @@ const createProductFromCommandFlow = ai.defineFlow(
     inputSchema: CreateProductFromCommandInputSchema,
     outputSchema: CreateProductFromCommandOutputSchema,
   },
-  async (input) => {
-    // 1. Extract structured details from the voice command
-    const { output: productDetails } = await extractDetailsPrompt(input);
-    if (!productDetails?.name || !productDetails?.keywords) {
-        throw new Error("Could not extract product name and keywords from the command. Please try being more descriptive.");
-    }
-    
-    // 2. Generate a compelling product description
-    const { description } = await generateProductDescription({
-      productName: productDetails.name,
-      keywords: productDetails.keywords,
-    });
+  async ({ command }) => {
+    const { output } = await ai.generate({
+      prompt: `You are an expert product lister for an e-commerce platform. A user will provide a voice command to describe a product. Your task is to:
+        1.  Extract or create a suitable name for the product.
+        2.  Write a compelling, professional product description that highlights its features.
+        3.  Generate a photorealistic, high-quality lifestyle image of the product. The product should be the central focus, on a clean, modern background.
 
-    // 3. Generate a product image from the description
-    const { media } = await ai.generate({
-        model: 'googleai/gemini-2.5-flash-image-preview',
-        prompt: `A photorealistic, high-quality lifestyle image of a ${productDetails.name}, described as: ${description}. The product is the central focus, on a clean, modern background.`,
-        config: {
+        User Command: "${command}"
+      `,
+      model: 'googleai/gemini-2.5-flash-image-preview',
+      output: {
+        schema: CreateProductFromCommandOutputSchema,
+      },
+       config: {
           responseModalities: ['TEXT', 'IMAGE'],
         }
     });
 
-    if (!media?.url) {
-        throw new Error('Image generation failed. The AI model did not return a valid image.');
+    if (!output || !output.imageUrl) {
+        throw new Error('AI failed to generate a complete product listing. Please try a more descriptive command.');
     }
 
-    // 4. Return the complete product object
-    return {
-      name: productDetails.name,
-      description,
-      imageUrl: media.url,
-    };
+    return output;
   }
 );
