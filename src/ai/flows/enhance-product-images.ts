@@ -31,33 +31,6 @@ export async function enhanceProductImage(input: EnhanceProductImageInput): Prom
   return enhanceProductImageFlow(input);
 }
 
-const generateLifestyleMockup = ai.defineTool({
-  name: 'generateLifestyleMockup',
-  description: 'Generates a lifestyle mockup image of a product.',
-  inputSchema: z.object({
-    productPhoto: z
-      .string()
-      .describe(
-        "A photo of the product, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
-      ),
-    style: z.string().describe('The desired style for the lifestyle mockup (e.g., modern living room, rustic kitchen).'),
-  }),
-  outputSchema: z.string().describe('The lifestyle mockup image as a data URI.'),
-},
-async (input) => {
-  const { media } = await ai.generate({
-    model: 'googleai/gemini-2.5-flash-image-preview',
-    prompt: [
-      { media: { url: input.productPhoto } },
-      { text: `Generate a photorealistic lifestyle image of this product in a ${input.style}. The product should be the main focus.` },
-    ],
-    config: {
-      responseModalities: ['TEXT', 'IMAGE'],
-    },
-  });
-  return media!.url;
-});
-
 const enhanceProductImageFlow = ai.defineFlow(
   {
     name: 'enhanceProductImageFlow',
@@ -65,12 +38,21 @@ const enhanceProductImageFlow = ai.defineFlow(
     outputSchema: EnhanceProductImageOutputSchema,
   },
   async input => {
-    // Generate the lifestyle mockup directly
-    const lifestyleMockup = await generateLifestyleMockup({
-      productPhoto: input.photoDataUri,
-      style: 'modern living room with soft, natural light',
-    });
+    const { media } = await ai.generate({
+        model: 'googleai/gemini-2.5-flash-image-preview',
+        prompt: [
+          { media: { url: input.photoDataUri } },
+          { text: 'Generate a photorealistic lifestyle image of this product in a modern living room with soft, natural light. The product should be the main focus.' },
+        ],
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'],
+        },
+      });
 
-    return { enhancedPhotoDataUri: lifestyleMockup };
+    if (!media?.url) {
+        throw new Error('Image generation failed to return a valid image.');
+    }
+
+    return { enhancedPhotoDataUri: media.url };
   }
 );
